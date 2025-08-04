@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soutenance - Moniteur El</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1a2b4b',
+                        'light-blue': '#4c74b1',
+                        'accent-blue': '#81b2e8',
+                        'soft-white': '#f5f7fa',
+                        'text-dark': '#1e293b',
+                        'text-muted': '#4b5563',
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        title: ['Poppins', 'sans-serif'],
+                    },
+                    keyframes: {
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        'slide-in-right': {
+                            '0%': { opacity: '0', transform: 'translateX(50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        'scale-in': {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        'pulse-bg': {
+                            '0%, 100%': { backgroundColor: 'rgba(129, 178, 232, 0.1)' },
+                            '50%': { backgroundColor: 'rgba(129, 178, 232, 0.3)' },
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
+                        'slide-in-right': 'slide-in-right 0.8s ease-out forwards',
+                        'scale-in': 'scale-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+                        'pulse-bg': 'pulse-bg 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f7fa;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .section-padding {
+            padding: 8rem 0;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #f5f7fa 0%, #dce4ee 100%);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease, transform 0.3s ease;
+            white-space: nowrap; 
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: #81b2e8;
+            transition: width 0.3s ease;
+        }
+        .nav-link.active {
+            color: #1a2b4b;
+            font-weight: 700;
+        }
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .card-elegant {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-elegant:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .icon-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background-color: #4c74b1;
+            color: #f5f7fa;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(76, 116, 177, 0.5);
+        }
+
+        .hide-scroll-bar {
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+        .hide-scroll-bar::-webkit-scrollbar {
+            display: none; 
+        }
+    </style>
+</head>
+<body class="bg-soft-white text-text-dark">
+
+    <!-- Barre de naigation -->
+    <header class="sticky top-0 z-50 bg-white bg-opacity-90 backdrop-blur-md shadow-lg">
+        <nav class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center text-text-muted">
+            <a href="#accueil" class="text-3xl font-title text-primary-blue py-2 transition-all hover:text-light-blue">Moniteur El</a>
+            <div class="flex-1">
+                <div class="flex flex-wrap justify-center space-x-2 md:space-x-4 lg:space-x-6">
+                    <a href="#accueil" class="px-2 py-1 nav-link transition-all active">Accueil</a>
+                    <a href="#introduction" class="px-2 py-1 nav-link transition-all">Intro</a>
+                    <a href="#plan" class="px-2 py-1 nav-link transition-all">Plan</a>
+                    <a href="#probleme" class="px-2 py-1 nav-link transition-all">Problème</a>
+                    <a href="#methodologie" class="px-2 py-1 nav-link transition-all">Méthode</a>
+                    <a href="#conception" class="px-2 py-1 nav-link transition-all">Conception</a>
+                    <a href="#architecture" class="px-2 py-1 nav-link transition-all">Tech</a>
+                    <a href="#realisation" class="px-2 py-1 nav-link transition-all">Réalisation</a>
+                    <a href="#delphi" class="px-2 py-1 nav-link transition-all">Coûts</a>
+                    <a href="#conclusion" class="px-2 py-1 nav-link transition-all">Conclusion</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!--Page de garde -->
+    <section id="accueil" class="hero-bg min-h-screen flex items-center justify-center text-text-dark text-center section-padding">
+        <div class="container mx-auto px-4 z-10">
+            <div class="">
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-title text-primary-blue animate-scale-in">Moniteur El</h1>
+                <p class="text-2xl md:text-4xl lg:text-5xl font-light mt-6">Plateforme de gestion de la consommation électrique en entreprise</p>
+                <div class="mt-16 text-lg md:text-xl font-medium space-y-4 text-text-muted">
+                    <p class="">Présenté par : <span class="font-bold text-text-dark">KABORE Nebyinga Jures Orix Nickèz</span></p>
+                    <p class="">Encadrants : <span class="font-bold text-text-dark">Charles TRAORE & Boubacar KEITA</span></p>
+                    <p class="">Année Académique : <span class="font-bold text-text-dark">2022-2023</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ntroduction -->
+    <section id="introduction" class="bg-soft-white section-padding">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-title text-primary-blue">Introduction</h2>
+                <p class="text-lg mt-4 max-w-3xl mx-auto text-text-muted">Contexte, problématique et solution proposée.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-10 text-center">
+                <div class="card-elegant p-8 border-t-4 border-light-blue">
+                    <div class="icon-box mx-auto mb-6"><i class="fas fa-industry"></i></div>
+                    <h3 class="text-2xl font-bold font-title mb-4">Contexte</h3>
+                    <p class="text-base text-text-muted">La gestion de l'énergie électrique est un enjeu majeur qui a un impact conséquent dans les entreprises. 
+                        Une mauvaise gestion se traduit par des coûts élevés et un gaspillage inutile qui réfrènent les évolutions econnomique.</p>
+                </div>
+                <div class="card-elegant p-8 border-t-4 border-accent-blue">
+                    <div class="icon-box mx-auto mb-6"><i class="fas fa-question-circle"></i></div>
+                    <h3 class="text-2xl font-bold font-title mb-4">Problématique</h3>
+                    <p class="text-base text-text-muted">Comment passer d'une gestion manuelle et réactive à une surveillance proactive et automatisée de la consommation ?</p>
+                </div>
+                <div class="card-elegant p-8 border-t-4 border-light-blue">
+                    <div class="icon-box mx-auto mb-6"><i class="fas fa-laptop-code"></i></div>
+                    <h3 class="text-2xl font-bold font-title mb-4">Solution</h3>
+                    <p class="text-base text-text-muted">Développement d'une plateforme web pour la surveillance en temps réel et l'analyse des données de consommation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--    Plan -->
+    <section id="plan" class="bg-white section-padding text-text-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-title text-primary-blue">Plan de la Présentation</h2>
+                <p class="text-lg mt-4 max-w-3xl mx-auto text-text-muted">Feuille de route de notre soutenance, détaillant les étapes clés du projet.</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-10">
+                <div class="space-y-8">
+                    <div class="flex items-center space-x-6 card-elegant p-6 border-l-4 border-light-blue">
+                        <span class="text-4xl font-bold text-accent-blue">01</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-text-dark">Introduction</h3>
+                            <p class="text-sm text-text-muted">Contexte, problématique et solution.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-6 card-elegant p-6 border-l-4 border-primary-blue">
+                        <span class="text-4xl font-bold text-accent-blue">02</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-text-dark">Problématique & Objectifs</h3>
+                            <p class="text-sm text-text-muted">Analyse de l'existant et définition des objectifs.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-6 card-elegant p-6 border-l-4 border-light-blue">
+                        <span class="text-4xl font-bold text-accent-blue">03</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-text-dark">Méthodologie (2TUP & UML)</h3>
+                            <p class="text-sm text-text-muted">Démarche projet et modélisation du système.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-6 card-elegant p-6 border-l-4 border-primary-blue">
+                        <span class="text-4xl font-bold text-accent-blue">04</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-text-dark">Conception & Modélisation</h3>
+                            <p class="text-sm text-text-muted">Diagrammes de Cas d'utilisation, Séquences, Classes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-8">
+                    <div class="flex items-center space-x-6 card-elegant p-6 border-l-4 border-light-blue">
+                        <span class="text-4xl font-bold text-accent-blue">05</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-text-dark">Architecture & Outils</h3>
+                            <p class="text-sm text-text-muted">Technologies du backend, du frontend et outils de développement.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-6 card-elegant p-6 border-l-4 border-primary-blue">
+                        <span class="text-4xl font-bold text-accent-blue">06</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-text-dark">Réalisation & Démonstration</h3>
+                            <p class="text-sm text-text-muted">Maquettes UI/UX et aperçu fonctionnel de l'application.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-6 card-elegant p-6 border-l-4 border-light-blue">
+                        <span class="text-4xl font-bold text-accent-blue">07</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-text-dark">Évaluation du coût (Delphi)</h3>
+                            <p class="text-sm text-text-muted">Estimation budgétaire du projet via la consultation d'experts.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-6 card-elegant p-6 border-l-4 border-primary-blue">
+                        <span class="text-4xl font-bold text-accent-blue">08</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-text-dark">Conclusion & Perspectives</h3>
+                            <p class="text-sm text-text-muted">Bilan du projet, impacts et orientations futures.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- problema et ob -->
+    <section id="probleme" class="bg-soft-white section-padding">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-title text-primary-blue">Problématique & Objectifs</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="flex flex-col h-full card-elegant p-8 border-b-4 border-light-blue">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-exclamation-triangle text-4xl text-primary-blue"></i>
+                        <h3 class="ml-4 text-3xl font-bold font-title text-text-dark">La Problématique</h3>
+                    </div>
+                    <p class="text-lg text-text-muted">L'absence de suivi en temps réel de la consommation électrique conduit à des dépenses imprévues et à un gaspillage d'énergie. Les méthodes de gestion actuelles sont inefficaces et ne permettent pas de prendre des décisions éclairées.</p>
+                </div>
+                <div class="flex flex-col h-full card-elegant p-8 border-b-4 border-accent-blue">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-bullseye text-4xl text-light-blue"></i>
+                        <h3 class="ml-4 text-3xl font-bold font-title text-text-dark">Nos Objectifs</h3>
+                    </div>
+                    <ul class="space-y-4 text-lg text-text-muted list-disc list-inside">
+                        <li>Développer une solution web pour la centralisation des données de consommation.</li>
+                        <li>Permettre la visualisation en temps réel et l'analyse des tendances.</li>
+                        <li>Améliorer l'efficacité énergétique et réduire les coûts d'exploitation.</li>
+                        <li>Créer un système d'alerte pour les pics de consommation anormaux.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- methodologie -->
+    <section id="methodologie" class="bg-white section-padding text-text-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-title text-primary-blue">Méthodologie d'Analyse (2TUP & UML)</h2>
+                <p class="text-lg mt-4 max-w-3xl mx-auto text-text-muted">Nous avons suivi une approche structurée pour la conception du système.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="card-elegant p-8 border-l-4 border-light-blue">
+                    <h3 class="text-3xl font-bold mb-4 font-title text-text-dark">La Démarche 2TUP</h3>
+                    <p class="text-lg mb-6 text-text-muted">La méthode 2TUP (Two-Track Unified Process) a guidé l'ensemble de notre projet, de la phase d'analyse des besoins à la conception détaillée.</p>
+                    <ul class="space-y-3 text-lg text-text-muted list-disc list-inside">
+                        <li>**Axe fonctionnel :** Élaboration des diagrammes de cas d'utilisation et de séquences.</li>
+                        <li>**Axe technique :** Modélisation de l'architecture logicielle et de la base de données.</li>
+                    </ul>
+                </div>
+                <div class="card-elegant p-8 border-l-4 border-accent-blue">
+                    <h3 class="text-3xl font-bold mb-4 font-title text-text-dark">Modélisation UML</h3>
+                    <p class="text-lg mb-6 text-text-muted">StarUML a été l'outil central pour la modélisation, nous permettant de visualiser et de structurer le système.</p>
+                    <ul class="space-y-3 text-lg text-text-muted list-disc list-inside">
+                        <li>**Diagramme de cas d'utilisation :** Définition des rôles et des fonctionnalités.</li>
+                        <li>**Diagramme de classes :** Représentation des entités et de leurs relations.</li>
+                        <li>**Diagramme de séquences :** Illustration des interactions entre les objets.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- illustrations uml -->
+    <section id="conception" class="bg-soft-white section-padding">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-title text-primary-blue">Diagrammes de Conception UML</h2>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="card-elegant p-6 border-b-4 border-light-blue">
+                    <h3 class="text-2xl font-bold mb-4 font-title text-text-dark">Cas d'Utilisation</h3>
+                    <p class="text-base text-text-muted mb-4">Fonctionnalités des acteurs "Admin" et "Superviseur".</p>
+                    <!-- Les images sont des placeholders et peuvent être remplacées par vos diagrammes StarUML -->
+                    <img src="images/c_u.png" class="w-full h-auto rounded-lg shadow-md transition-transform duration-300 hover:scale-105" alt="Diagramme de cas d'utilisation">
+                </div>
+                <div class="card-elegant p-6 border-b-4 border-accent-blue">
+                    <h3 class="text-2xl font-bold mb-4 font-title text-text-dark">Diagramme de Classes</h3>
+                    <p class="text-base text-text-muted mb-4">Structure des classes : `User`, `Compteur`, `DonneeConsommation`, `Alerte`.</p>
+                    <!-- Les images sont des placeholders et peuvent être remplacées par vos diagrammes StarUML -->
+                    <img src="images/d_class.png" class="w-full h-auto rounded-lg shadow-md transition-transform duration-300 hover:scale-105" alt="Diagramme de classes">
+                </div>
+                <div class="card-elegant p-6 border-b-4 border-light-blue">
+                    <h3 class="text-2xl font-bold mb-4 font-title text-text-dark">Diagramme de Séquences</h3>
+                    <p class="text-base text-text-muted mb-4">Exemple : Séquence de la vue de la consommation.</p>
+                    <!-- Les images sont des placeholders et peuvent être remplacées par vos diagrammes StarUML -->
+                    <img src="images/d_s_cons.png" class="w-full h-auto rounded-lg shadow-md transition-transform duration-300 hover:scale-105" alt="Diagramme de séquences">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- tech -->
+    <section id="architecture" class="bg-white section-padding">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-title text-primary-blue">Architecture Technique & Outils</h2>
+                <p class="text-lg mt-4 max-w-3xl mx-auto text-text-muted">Les technologies au cœur de notre solution, pour un système robuste et performant.</p>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="card-elegant p-8 border-b-4 border-light-blue h-full">
+                    <h3 class="text-3xl font-bold mb-6 font-title text-text-dark">Backend</h3>
+                    <ul class="space-y-6 text-left text-lg flex-grow">
+                        <li class="flex items-center group">
+                            <i class="fab fa-laravel text-primary-blue text-3xl mr-4 group-hover:scale-110 transition-transform"></i>
+                            <span class="text-text-dark">**Laravel :** Framework PHP pour une architecture MVC.</span>
+                        </li>
+                        <li class="flex items-center group">
+                            <i class="fas fa-database text-light-blue text-3xl mr-4 group-hover:scale-110 transition-transform"></i>
+                            <span class="text-text-dark">**MySQL :** Base de données relationnelle fiable.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-elegant p-8 border-b-4 border-accent-blue h-full">
+                    <h3 class="text-3xl font-bold mb-6 font-title text-text-dark">Frontend</h3>
+                    <ul class="space-y-6 text-left text-lg flex-grow">
+                        <li class="flex items-center group">
+                            <i class="fas fa-chart-bar text-primary-blue text-3xl mr-4 group-hover:scale-110 transition-transform"></i>
+                            <span class="text-text-dark">**Chart.js :** Pour la visualisation dynamique des données.</span>
+                        </li>
+                        <li class="flex items-center group">
+                            <i class="fab fa-css3-alt text-light-blue text-3xl mr-4 group-hover:scale-110 transition-transform"></i>
+                            <span class="text-text-dark">**Tailwind CSS :** Design adaptatif et moderne.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-elegant p-8 border-b-4 border-light-blue h-full">
+                    <h3 class="text-3xl font-bold mb-6 font-title text-text-dark">Outils</h3>
+                    <ul class="space-y-6 text-left text-lg flex-grow">
+                        <li class="flex items-center group">
+                            <i class="fas fa-project-diagram text-primary-blue text-3xl mr-4 group-hover:scale-110 transition-transform"></i>
+                            <span class="text-text-dark">**StarUML :** Modélisation des diagrammes UML.</span>
+                        </li>
+
+                        <li class="flex items-center group">
+                            <i class="fab fa-github text-primary-blue text-3xl mr-4 group-hover:scale-110 transition-transform"></i>
+                            <span class="text-text-dark">**GitHub :** Gestion des versions du code source.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- réalisation -->
+    <section id="realisation" class="bg-soft-white section-padding">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-title text-primary-blue">Réalisation & Démonstration</h2>
+                <p class="text-lg mt-4 max-w-3xl mx-auto text-text-muted">Aperçu des interfaces de la plateforme et structure des données de simulation.</p>
+            </div>
+            
+            <!--captures d'écran -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="card-elegant p-4">
+                    <h3 class="text-xl font-bold mb-2 font-title text-text-dark">Tableau de bord</h3>
+                    <p class="text-sm text-text-muted mb-4">Vue d'ensemble de la consommation en temps réel.</p>
+                    <img src="images/dashboard_p.png" class="w-full h-auto rounded-lg shadow-md transition-transform duration-300 hover:scale-105" alt="Capture d'écran du tableau de bord">
+                </div>
+                <div class="card-elegant p-4">
+                    <h3 class="text-xl font-bold mb-2 font-title text-text-dark">Gestion des capteurs</h3>
+                    <p class="text-sm text-text-muted mb-4">Interface pour ajouter, modifier ou supprimer des capteurs.</p>
+                    <img src="images/ges_cap.png" class="w-full h-auto rounded-lg shadow-md transition-transform duration-300 hover:scale-105" alt="Capture d'écran de l'interface de gestion des compteurs">
+                </div>
+                <div class="card-elegant p-4">
+                    <h3 class="text-xl font-bold mb-2 font-title text-text-dark">Historique de consommation</h3>
+                    <p class="text-sm text-text-muted mb-4">Visualisation des données passées pour l'analyse.</p>
+                    <img src="images/his_cons.png" class="w-full h-auto rounded-lg shadow-md transition-transform duration-300 hover:scale-105" alt="Capture d'écran de l'historique de consommation">
+                </div>
+            </div>
+
+            <!-- données JSON -->
+            <div class="mt-16 pt-16 border-t border-gray-300">
+                <h3 class="text-3xl font-bold font-title text-primary-blue mb-4 text-center">Structure des données de simulation</h3>
+                <p class="text-lg text-text-muted max-w-4xl mx-auto mb-6">Pour la démonstration, nous avons simulé des données de consommation en utilisant la structure JSON suivante. Ce format a été choisi pour sa flexibilité et sa facilité de traitement par l'application web.</p>
+                <div class="bg-gray-800 rounded-xl p-6 overflow-x-auto shadow-xl font-mono text-sm text-gray-200">
+                    <pre><code>[
+  {
+    "id": 1,
+    "timestamp": "2023-08-01T10:00:00Z",
+    "total_consumption_kwh": 125.5,
+    "metrics": {
+      "power_active_kW": 100.2,
+      "power_reactive_kVAr": 60.8,
+      "voltage_V": 220.5,
+      "current_A": 15.3
+    },
+    "consumption_by_department": {
+      "production": 75.0,
+      "administration": 30.5,
+      "it_services": 20.0
+    }
+  },
+  {
+    "id": 2,
+    "timestamp": "2023-08-01T10:15:00Z",
+    "total_consumption_kwh": 130.2,
+    "metrics": {
+      "power_active_kW": 105.1,
+      "power_reactive_kVAr": 62.1,
+      "voltage_V": 221.0,
+      "current_A": 16.0
+    },
+    "consumption_by_department": {
+      "production": 78.5,
+      "administration": 31.0,
+      "it_services": 20.7
+    }
+  }
+]</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- delphy -->
+    <section id="delphi" class="bg-white section-padding text-text-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-title text-primary-blue">Évaluation des Coûts : Méthode Delphi</h2>
+                <p class="text-lg mt-4 max-w-3xl mx-auto text-text-muted">Estimation budgétaire du projet via la consultation structurée d'experts, placée en fin de projet.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-10 text-center">
+                <div class="card-elegant p-8 border-t-4 border-light-blue">
+                    <div class="icon-box mx-auto mb-6"><i class="fas fa-users-cog"></i></div>
+                    <h3 class="text-2xl font-bold font-title text-text-dark mb-2">Phase 1 : Consultation</h3>
+                    <p class="text-base text-text-muted">Nous avons à ce niveau eu à faire une consultation approfondie de devis de projet similaire de GO AI corporation dont nous sommes meùbre, en plus d'une dizaine d'appels d'offres gouvernementales
+                        pour des projets en développement et gestion de projet similaire.</p>
+                </div>
+                <div class="card-elegant p-8 border-t-4 border-accent-blue">
+                    <div class="icon-box mx-auto mb-6"><i class="fas fa-balance-scale"></i></div>
+                    <h3 class="text-2xl font-bold font-title text-text-dark mb-2">Phase 2 : Consensus</h3>
+                    <p class="text-base text-text-muted">Dans cette phase nous avons rassemblé les données de la première phase
+                        pour recuperer des avis nouveaux dans le but de converger vers une estimation objective.</p>
+                </div>
+                <div class="card-elegant p-8 border-t-4 border-light-blue">
+                    <div class="icon-box mx-auto mb-6"><i class="fas fa-dollar-sign"></i></div>
+                    <h3 class="text-2xl font-bold font-title text-text-dark mb-2">Phase 3 : Estimation Finale</h3>
+                    <p class="text-base text-text-muted">La définition d'une estimation de coût finale, 
+                        validée par l'ensemble des experts consultés dans la phase 2, nous à donné la moyenne de 1 650 000 F cfa, 
+                        Coût defeni comme capex pour notre projet. En incluant donc les réccurente pour sa viabilité, 
+                        nous avons un total de 1 908 000 F CFA.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Conclusion -->
+    <section id="conclusion" class="bg-soft-white section-padding">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-title text-primary-blue">Conclusion & Perspectives</h2>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="card-elegant p-8 border-l-4 border-light-blue">
+                    <h3 class="text-2xl font-bold mb-4 font-title text-text-dark">Bilan du Projet</h3>
+                    <p class="text-lg text-text-muted">Le projet a atteint ses objectifs en offrant une solution concrète pour la gestion énergétique. La plateforme permet une prise de décision basée sur des données, conduisant à des économies substantielles et une efficacité accrue.</p>
+                </div>
+                <div class="card-elegant p-8 border-l-4 border-accent-blue">
+                    <h3 class="text-2xl font-bold mb-4 font-title text-text-dark">Évolutions Futures</h3>
+                    <p class="text-lg text-text-muted">Pour l'avenir, nous envisageons d'intégrer un module de prédiction de consommation basé sur l'IA, de développer une application mobile dédiée pour rendre on ne peut plus disponnible l'accès à l'information.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- finale -->
+    <section id="remerciements" class="hero-bg min-h-screen flex items-center justify-center text-text-dark text-center">
+        <div class="container mx-auto px-4">
+            <div class="">
+                <h2 class="text-6xl md:text-8xl font-title text-primary-blue mb-8 animate-pulse-bg rounded-full p-4 inline-block">Merci.</h2>
+                <p class="text-3xl font-sans mt-4 text-text-muted"></p>
+            </div>
+        </div>
+    </section>
+
+    <button id="go-to-top" class="fixed bottom-8 right-8 z-50 p-4 bg-primary-blue text-white rounded-full shadow-lg transition-all hover:bg-light-blue focus:outline-none focus:ring-4 focus:ring-primary-blue focus:ring-opacity-50 hidden">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const goToTopButton = document.getElementById('go-to-top');
+            if (goToTopButton) { 
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 500) {
+                        goToTopButton.classList.remove('hidden');
+                    } else {
+                        goToTopButton.classList.add('hidden');
+                    }
+                });
+
+                goToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.href.includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
